@@ -59,4 +59,3 @@ jobs:
       run: |
         pytest tests/test_decoder.py
         pytest tests/test_encoder.py
-      continue-on-error: true
