@@ -29,7 +29,7 @@ jobs:
     - name: Filter timm versions
       id: filter-versions
       run: |
-        VERSIONS=$(echo $VERSIONS | tr ',' '\n' | awk '$1>"0.3.8" && $1<"0.4.1"' | tr '\n' ',' | sed 's/,$//')
+        VERSIONS=$(echo $VERSIONS | tr ',' '\n' | awk '$1>="0.4.0" && $1<"1.0.0"' | tr '\n' ',' | sed 's/,$//')
         echo "VERSIONS=$VERSIONS" >> $GITHUB_ENV
 
     - name: Set matrix for next job
