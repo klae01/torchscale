@@ -36,7 +36,7 @@ jobs:
       id: set-matrix
       run: |
         VERSIONS=$(echo $VERSIONS | jq -R -s -c 'split(",")')
-        echo "::set-output name=matrix::{\"python-version\": [\"3.8\", \"3.9\", \"3.10\", \"3.11\"], \"timm-version\": $VERSIONS}"
+        echo "::set-output name=matrix::{\"python-version\": [\"3.8\", \"3.9\", \"3.10\"], \"timm-version\": $VERSIONS}"
   build:
     needs: fetch-versions
     runs-on: ubuntu-latest
