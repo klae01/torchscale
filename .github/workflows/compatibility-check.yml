@@ -26,6 +26,12 @@ jobs:
         VERSIONS=$(pip index versions timm | grep -oP '(?<=Available versions: ).*' | tr -d ' ' | tr -d '\n')
         echo "VERSIONS=$VERSIONS" >> $GITHUB_ENV
 
+    - name: Filter timm versions
+      id: filter-versions
+      run: |
+        VERSIONS=$(echo $VERSIONS | tr ',' '\n' | awk '$1>"0.3.0" && $1<"0.5.0"' | tr '\n' ',' | sed 's/,$//')
+        echo "VERSIONS=$VERSIONS" >> $GITHUB_ENV
+
     - name: Set matrix for next job
       id: set-matrix
       run: |
