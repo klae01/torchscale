@@ -23,13 +23,13 @@ jobs:
     - name: Fetch timm versions
       id: fetch-versions
       run: |
-        VERSIONS=$(pip index versions timm | grep -oP '(?<=Available versions: ).*' | tr ',' '\n' | tr -d ' ')
+        VERSIONS=$(pip index versions timm | grep -oP '(?<=Available versions: ).*' | tr -d ' ' | tr -d '\n')
         echo "VERSIONS=$VERSIONS" >> $GITHUB_ENV
 
     - name: Set matrix for next job
       id: set-matrix
       run: |
-        VERSIONS=$(echo $VERSIONS | jq -R -s -c 'split("\n")')
+        VERSIONS=$(echo $VERSIONS | jq -R -s -c 'split(",")')
         echo "::set-output name=matrix::{\"python-version\": [\"3.8\", \"3.9\", \"3.10\", \"3.11\"], \"timm-version\": $VERSIONS}"
   build:
     needs: fetch-versions
